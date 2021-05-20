@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'story_brain.dart';
-//TODO: Step 15 - Run the app and see if you can see the screen update with the first story. Delete this TODO if it looks as you expected.
 
 void main() => runApp(Destini());
 
@@ -13,7 +12,7 @@ class Destini extends StatelessWidget {
   }
 }
 
-StoryBrain storyBrain = new StoryBrain();
+StoryBrain storyBrain = StoryBrain();
 
 class StoryPage extends StatefulWidget {
   _StoryPageState createState() => _StoryPageState();
@@ -25,7 +24,7 @@ class _StoryPageState extends State<StoryPage> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          image: const DecorationImage(
+          image: DecorationImage(
             image: AssetImage('images/background.png'),
             fit: BoxFit.cover,
           ),
@@ -62,8 +61,8 @@ class _StoryPageState extends State<StoryPage> {
                   child: Text(
                     storyBrain.getChoice1(),
                     style: TextStyle(
-                      fontSize: 20.0,
                       color: Colors.white,
+                      fontSize: 20.0,
                     ),
                   ),
                 ),
@@ -73,23 +72,24 @@ class _StoryPageState extends State<StoryPage> {
               ),
               Expanded(
                 flex: 2,
-                //TODO: Step 26 - Use a Flutter Visibility Widget to wrap this FlatButton.
-                //TODO: Step 28 - Set the "visible" property of the Visibility Widget to equal the output from the buttonShouldBeVisible() method in the storyBrain.
-                child: TextButton(
-                  onPressed: () {
-                    //Choice 2 made by user.
-                    setState(() {
-                      storyBrain.nextStory(2);
-                    });
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                  ),
-                  child: Text(
-                    storyBrain.getChoice2(),
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.white,
+                child: Visibility(
+                  visible: storyBrain.buttonShouldBeVisible(),
+                  child: TextButton(
+                    onPressed: () {
+                      //Choice 2 made by user.
+                      setState(() {
+                        storyBrain.nextStory(2);
+                      });
+                    },
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                    ),
+                    child: Text(
+                      storyBrain.getChoice2(),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                      ),
                     ),
                   ),
                 ),
@@ -101,5 +101,3 @@ class _StoryPageState extends State<StoryPage> {
     );
   }
 }
-
-//TODO: Step 29 - Run the app and test it against the Story Outline to make sure you've completed all the steps. The code for the completed app can be found here: https://github.com/londonappbrewery/destini-challenge-completed/
