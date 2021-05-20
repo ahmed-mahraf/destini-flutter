@@ -1,6 +1,6 @@
 import 'package:destini_challenge/story.dart';
 
-class StoryBrain extends Story {
+class StoryBrain {
   List<Story> _storyData = [
     Story(
         storyTitle:
